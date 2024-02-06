@@ -19,7 +19,7 @@ public sealed partial class NavigationViewModel
 {
     private readonly INavigationHistoryHandler history;
     private readonly INavigationItem rootNavigationItem;
-    private readonly IWindowManager windowManager;
+    private readonly INavigationWindowManager windowManager;
 
     [ObservableProperty]
     private INavigationItem? currentNavigationItem;
@@ -37,13 +37,13 @@ public sealed partial class NavigationViewModel
     /// <param name="messenger">A <see cref="IMessenger"/>.</param>
     /// <param name="history">A <see cref="INavigationHistoryHandler"/>.</param>
     /// <param name="uiSynchronizationContext">The <see cref="IUiSynchronizationContext"/>.</param>
-    /// <param name="windowManager">The <see cref="IWindowManager"/>.</param>
+    /// <param name="windowManager">The <see cref="INavigationWindowManager"/>.</param>
     public NavigationViewModel(
         INavigationItemFactory navigationItemFactory,
         IMessenger messenger,
         INavigationHistoryHandler history,
         IUiSynchronizationContext uiSynchronizationContext,
-        IWindowManager windowManager)
+        INavigationWindowManager windowManager)
         : base(messenger)
     {
         this.history = history;
