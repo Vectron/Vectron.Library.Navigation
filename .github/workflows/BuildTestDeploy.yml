@@ -1,0 +1,61 @@
+name: BuildTestDeploy
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+    branches:
+      - 'main'
+    paths-ignore:
+      - '.editorconfig'
+      - '.gitattributes'
+      - '.gitignore'
+      - '.runsettings'
+      - 'LICENSE.txt'
+      - 'README.md'
+  
+  pull_request:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '.editorconfig'
+      - '.gitattributes'
+      - '.gitignore'
+      - '.runsettings'
+      - 'LICENSE.txt'
+      - 'README.md'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  call-build-test:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+    uses: Vectron/GithubWorkflows/.github/workflows/BuildAndTest.yml@main
+    with:
+      os: ${{ matrix.os }}
+      dotnet_version: 8.0.x
+      solution_file: Vectron.Library.Navigation.sln
+
+  call-deploy:
+    needs: call-build-test
+    permissions:
+      packages: write
+    uses: Vectron/GithubWorkflows/.github/workflows/DeployNugetGithub.yml@main
+    with:
+      os: ubuntu-latest
+      dotnet_version: 8.0.x
+      solution_file: Vectron.Library.Navigation.sln
+    secrets:
+      NUGET_KEY: ${{ secrets.NUGET_KEY }}
+      
+
+  call-release:
+    needs: call-build-test
+    permissions:
+      deployments: write
+      contents: write
+    uses: Vectron/GithubWorkflows/.github/workflows/CreateRelease.yml@main
