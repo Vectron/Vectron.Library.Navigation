@@ -37,6 +37,27 @@ public sealed class NavigationBuilder(IServiceCollection services, Guid id, bool
     }
 
     /// <summary>
+    /// Add a child navigation item.
+    /// </summary>
+    /// <param name="setupChild">A function to setup the child navigation item.</param>
+    /// <returns>A reference to the <see cref="NavigationBuilder"/> for the child.</returns>
+    public NavigationBuilder AddChild(Action<NavigationBuilder> setupChild) => AddChild(Guid.NewGuid(), setupChild);
+
+    /// <summary>
+    /// Add a child navigation item.
+    /// </summary>
+    /// <param name="id">The id of the child.</param>
+    /// <param name="setupChild">A function to setup the child navigation item.</param>
+    /// <returns>A reference to the <see cref="NavigationBuilder"/> for the child.</returns>
+    public NavigationBuilder AddChild(Guid id, Action<NavigationBuilder> setupChild)
+    {
+        var childBuilder = new NavigationBuilder(services, id, isRoot: false);
+        _ = services.Configure<NavigationItemOptions>(optionKey, o => o.Children.Add(id));
+        setupChild.Invoke(childBuilder);
+        return this;
+    }
+
+    /// <summary>
     /// Set the auto navigate for this item..
     /// </summary>
     /// <param name="autoNavigate"><see langword="true"/> when the items gets navigated to on adding.</param>
