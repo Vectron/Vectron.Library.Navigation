@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{259895C4-F86
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vectron.Library.Navigation", "src\Vectron.Library.Navigation\Vectron.Library.Navigation.csproj", "{97798700-E1A0-469F-8414-D1876ED09C7F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vectron.Library.Navigation.Wpf", "src\Vectron.Library.Navigation.Wpf\Vectron.Library.Navigation.Wpf.csproj", "{3F8D9876-DE7F-4103-A162-4E2F94919FF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{97798700-E1A0-469F-8414-D1876ED09C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97798700-E1A0-469F-8414-D1876ED09C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97798700-E1A0-469F-8414-D1876ED09C7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F8D9876-DE7F-4103-A162-4E2F94919FF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8D9876-DE7F-4103-A162-4E2F94919FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8D9876-DE7F-4103-A162-4E2F94919FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8D9876-DE7F-4103-A162-4E2F94919FF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +53,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A4EEFC71-A5A1-45EA-9A74-6224C92CC6A9} = {F99E3A66-9DAC-4007-A056-74E8F27270D4}
 		{97798700-E1A0-469F-8414-D1876ED09C7F} = {259895C4-F867-446A-9C03-5B202A47ED16}
+		{3F8D9876-DE7F-4103-A162-4E2F94919FF3} = {259895C4-F867-446A-9C03-5B202A47ED16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5227B8C6-6999-4F88-964E-02DDA7D14D88}
