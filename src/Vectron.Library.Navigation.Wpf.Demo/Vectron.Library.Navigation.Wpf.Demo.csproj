@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
+    <UseWPF>true</UseWPF>
+    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0476" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="8.0.0" />
+    <PackageReference Include="Vectron.Extensions.Hosting" Version="1.0.52-ga475fdc2bf" />
+    <PackageReference Include="Vectron.Extensions.Hosting.Wpf" Version="0.0.41-g2cd3a4d391" />
+    <PackageReference Include="Vectron.Extensions.Logging.TextBlock" Version="4.2.74-g974298e457" />
+    <PackageReference Include="Vectron.Library.Wpf" Version="4.0.42-g2f2fe93422" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vectron.Library.Navigation.Wpf\Vectron.Library.Navigation.Wpf.csproj" />
+    <ProjectReference Include="..\Vectron.Library.Navigation\Vectron.Library.Navigation.csproj" />
+  </ItemGroup>
+  
+</Project>
