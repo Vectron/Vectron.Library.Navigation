@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
     <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <ItemGroup>
