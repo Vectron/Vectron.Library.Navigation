@@ -5,6 +5,7 @@
     <TargetPlatformIdentifier>windows</TargetPlatformIdentifier>
     <UseWPF>true</UseWPF>
     <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
