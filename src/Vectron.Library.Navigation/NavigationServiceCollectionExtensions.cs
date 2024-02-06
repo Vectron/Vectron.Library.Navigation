@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Vectron.Library.Navigation.Builder;
 using Vectron.Library.Navigation.Internal;
+using Vectron.Library.Navigation.Threading;
 
 namespace Vectron.Library.Navigation;
 
@@ -20,6 +21,7 @@ public static class NavigationServiceCollectionExtensions
         services.TryAddSingleton<INavigationWindowManager, DefaultNavigationWindowManager>();
         services.TryAddSingleton<INavigationHistoryHandler, NavigationHistoryHandler>();
         services.TryAddTransient<INavigationItemFactory, NavigationItemFactory>();
+        services.TryAddSingleton<IUiSynchronizationContext, DefaultUiSynchronizationContext>();
         services.TryAddTransient<NavigationViewModel>();
         return new NavigationBuilder(services, NavigationItemOptions.RootNavigationItemId, isRoot: true);
     }
