@@ -6,7 +6,12 @@ namespace Vectron.Library.Navigation.Internal;
 internal sealed class DefaultNavigationWindowManager : INavigationWindowManager
 {
     /// <inheritdoc/>
-    public void OpenWindow(object dataContext)
+    public void OpenWindow(object dataContext, string caption)
+    {
+    }
+
+    /// <inheritdoc/>
+    public void OpenWindow(object viewModel)
     {
     }
 }
