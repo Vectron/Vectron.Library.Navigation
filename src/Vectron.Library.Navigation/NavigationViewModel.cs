@@ -124,12 +124,13 @@ public sealed partial class NavigationViewModel
     [RelayCommand]
     private void PopOut()
     {
-        if (CurrentViewModel == null)
+        if (CurrentViewModel == null
+            || CurrentNavigationItem == null)
         {
             return;
         }
 
-        windowManager.OpenWindow(CurrentViewModel);
+        windowManager.OpenWindow(CurrentViewModel, CurrentNavigationItem.Caption);
         NavigateBack();
     }
 }
