@@ -84,7 +84,7 @@ public sealed partial class NavigationViewModel
     private static IEnumerable<INavigationItem> IterateAllChildren(INavigationItem navigationItem)
     {
         yield return navigationItem;
-        var providerChildren = navigationItem.ChildrenProvider?.NavigationItems ?? Enumerable.Empty<INavigationItem>();
+        var providerChildren = navigationItem.ChildrenProvider?.NavigationItems ?? [];
         var selector = navigationItem.Children.Concat(providerChildren).SelectMany(IterateAllChildren);
         foreach (var child in selector)
         {

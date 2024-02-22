@@ -13,7 +13,7 @@ internal sealed class NavigationItemOptions
     /// <summary>
     /// Initializes a new instance of the <see cref="NavigationItemOptions"/> class.
     /// </summary>
-    public NavigationItemOptions() => Children = new List<Guid>();
+    public NavigationItemOptions() => Children = [];
 
     /// <summary>
     /// Gets or sets a value indicating whether a value indicating whether this item automatically gets navigated too.
