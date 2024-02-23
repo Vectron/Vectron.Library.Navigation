@@ -20,7 +20,7 @@
     <PackageReference Include="Vectron.Extensions.Hosting" Version="1.0.57" />
     <PackageReference Include="Vectron.Extensions.Hosting.Wpf" Version="1.0.10" />
     <PackageReference Include="Vectron.Extensions.Logging.TextBlock" Version="4.2.104" />
-    <PackageReference Include="Vectron.Library.Wpf" Version="4.0.42-g2f2fe93422" />
+    <PackageReference Include="Vectron.Library.Wpf" Version="4.0.69" />
   </ItemGroup>
 
   <ItemGroup>
