@@ -18,7 +18,6 @@ public static class NavigationServiceCollectionExtensions
     /// <returns>The root <see cref="NavigationBuilder"/>.</returns>
     public static NavigationBuilder AddNavigation(this IServiceCollection services)
     {
-        services.TryAddSingleton<INavigationWindowManager, DefaultNavigationWindowManager>();
         services.TryAddSingleton<INavigationHistoryHandler, NavigationHistoryHandler>();
         services.TryAddTransient<INavigationItemFactory, NavigationItemFactory>();
         services.TryAddSingleton<IUiSynchronizationContext, DefaultUiSynchronizationContext>();
