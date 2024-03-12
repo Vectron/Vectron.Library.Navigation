@@ -19,7 +19,7 @@ public sealed partial class NavigationViewModel
 {
     private readonly INavigationHistoryHandler history;
     private readonly INavigationItem rootNavigationItem;
-    private readonly INavigationWindowManager windowManager;
+    private readonly INavigationWindowManager? windowManager;
 
     [ObservableProperty]
     private INavigationItem? currentNavigationItem;
@@ -43,7 +43,7 @@ public sealed partial class NavigationViewModel
         IMessenger messenger,
         INavigationHistoryHandler history,
         IUiSynchronizationContext uiSynchronizationContext,
-        INavigationWindowManager windowManager)
+        INavigationWindowManager? windowManager)
         : base(messenger)
     {
         this.history = history;
@@ -56,6 +56,8 @@ public sealed partial class NavigationViewModel
         var first = Root.Children.FirstOrDefault();
         first?.NavigateToCommand.Execute(parameter: false);
     }
+
+    private bool CanExecutePopOut => windowManager != null;
 
     /// <inheritdoc/>
     public void Receive(NavigateToMessage message)
@@ -121,10 +123,11 @@ public sealed partial class NavigationViewModel
         NavigateTo(foundItem);
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanExecutePopOut))]
     private void PopOut()
     {
-        if (CurrentViewModel == null
+        if (windowManager == null
+            || CurrentViewModel == null
             || CurrentNavigationItem == null)
         {
             return;
