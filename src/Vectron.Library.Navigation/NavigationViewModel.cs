@@ -43,7 +43,7 @@ public sealed partial class NavigationViewModel
         IMessenger messenger,
         INavigationHistoryHandler history,
         IUiSynchronizationContext uiSynchronizationContext,
-        INavigationWindowManager? windowManager)
+        INavigationWindowManager? windowManager = null)
         : base(messenger)
     {
         this.history = history;
