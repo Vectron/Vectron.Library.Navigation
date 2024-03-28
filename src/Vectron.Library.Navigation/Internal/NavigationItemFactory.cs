@@ -25,7 +25,7 @@ internal sealed partial class NavigationItemFactory(
     {
         var options = optionsMonitor.Get(id.ToString());
         var caption = options.CaptionProvider?.Invoke(provider) ?? string.Empty;
-        var children = options.Children.Select(CreateNavigationItem).ToArray();
+        var children = options.Children.Select(x => CreateNavigationItem(x, provider)).ToArray();
         var navigationItemProvider = options.RuntimeItemsProvider != null
             ? provider.GetService(options.RuntimeItemsProvider) as INavigationItemProvider
             : null;
