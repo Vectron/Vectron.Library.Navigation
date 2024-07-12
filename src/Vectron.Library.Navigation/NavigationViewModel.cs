@@ -51,7 +51,8 @@ public sealed partial class NavigationViewModel
         rootNavigationItem = navigationItemFactory.CreateNavigationItem(NavigationItemOptions.RootNavigationItemId)
             ?? throw new InvalidOperationException("No navigation has been set up");
         root = new NavigationItemViewModel(rootNavigationItem, messenger, uiSynchronizationContext);
-        messenger.RegisterAll(this);
+
+        IsActive = true;
 
         var first = Root.Children.FirstOrDefault();
         first?.NavigateToCommand.Execute(parameter: false);
