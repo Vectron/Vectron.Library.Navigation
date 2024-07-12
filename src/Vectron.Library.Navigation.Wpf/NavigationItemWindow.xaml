@@ -9,5 +9,5 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <ContentControl Content="{Binding Mode=OneWay}" IsTabStop="False" />
+    <ContentPresenter Content="{Binding Mode=OneWay}" />
 </Window>

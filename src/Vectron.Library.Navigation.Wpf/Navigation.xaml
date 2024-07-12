@@ -59,7 +59,7 @@
                     </DockPanel>
                 </GroupBox.Header>
 
-                <ContentControl Content="{Binding CurrentViewModel, Mode=OneWay}" IsTabStop="False" />
+                <ContentPresenter Content="{Binding CurrentViewModel, Mode=OneWay}" />
             </GroupBox>
         </Grid>
     </DataTemplate>
