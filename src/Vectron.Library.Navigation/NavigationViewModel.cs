@@ -1,3 +1,4 @@
+using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -79,6 +80,7 @@ public sealed partial class NavigationViewModel
         if (CurrentNavigationItem == message.NavigationItem)
         {
             CurrentNavigationItem = null;
+            SetIsActive(CurrentViewModel, newValue: false);
             CurrentViewModel = null;
             NavigateBack();
         }
@@ -93,6 +95,30 @@ public sealed partial class NavigationViewModel
         {
             yield return child;
         }
+    }
+
+    private static void SetIsActive(object? viewModel, bool newValue)
+    {
+        if (viewModel == null)
+        {
+            return;
+        }
+
+        if (viewModel is ObservableRecipient recipient)
+        {
+            recipient.IsActive = newValue;
+            return;
+        }
+
+        var viewModelType = viewModel.GetType();
+        var recepientAttribute = viewModelType.GetCustomAttribute<ObservableRecipientAttribute>(inherit: true);
+        if (recepientAttribute == null)
+        {
+            return;
+        }
+
+        var isActiveProperty = viewModelType.GetProperty(nameof(IsActive));
+        isActiveProperty?.SetValue(viewModel, newValue);
     }
 
     private void NavigateBack()
@@ -113,8 +139,10 @@ public sealed partial class NavigationViewModel
             history.AddEntry(CurrentNavigationItem);
         }
 
+        SetIsActive(CurrentViewModel, newValue: false);
         CurrentNavigationItem = target;
         CurrentViewModel = CurrentNavigationItem?.ViewModelFactory.Invoke();
+        SetIsActive(CurrentViewModel, newValue: true);
     }
 
     private void NavigateTo(Func<INavigationItem, bool> predicate)
