@@ -105,11 +105,24 @@ public sealed class NavigationBuilder(IServiceCollection services, Guid id, bool
     /// <returns>A reference to this instance after the operation has completed.</returns>
     public NavigationBuilder Content<TViewModel>()
         where TViewModel : class
+        => Content<TViewModel>(ServiceLifetime.Transient);
+
+    /// <summary>
+    /// Set the view model to use when displaying the content.
+    /// </summary>
+    /// <typeparam name="TViewModel">The type of the view model.</typeparam>
+    /// <param name="serviceLifetime">The lifetime of the view model service.</param>
+    /// <returns>A reference to this instance after the operation has completed.</returns>
+    public NavigationBuilder Content<TViewModel>(ServiceLifetime serviceLifetime)
+        where TViewModel : class
     {
         if (!isRoot)
         {
-            _ = services.Configure<NavigationItemOptions>(optionKey, o => o.Content = typeof(TViewModel));
-            _ = services.AddScoped<TViewModel>();
+            var serviceDescriptor = ServiceDescriptor.Describe(typeof(TViewModel), typeof(TViewModel), serviceLifetime);
+            services
+                .Configure<NavigationItemOptions>(optionKey, o => o.Content = typeof(TViewModel))
+                .TryAdd(serviceDescriptor);
+
             return this;
         }
 
@@ -125,9 +138,23 @@ public sealed class NavigationBuilder(IServiceCollection services, Guid id, bool
     /// <returns>A reference to this instance after the operation has completed.</returns>
     public NavigationBuilder Provider<TProvider>(Guid id)
         where TProvider : class, INavigationItemProvider
+        => Provider<TProvider>(id, ServiceLifetime.Singleton);
+
+    /// <summary>
+    /// Set the provider that can generate items at runtime.
+    /// </summary>
+    /// <typeparam name="TProvider">The type of provider.</typeparam>
+    /// <param name="id">THe id to look up options.</param>
+    /// <param name="serviceLifetime">The lifetime of the provider service.</param>
+    /// <returns>A reference to this instance after the operation has completed.</returns>
+    public NavigationBuilder Provider<TProvider>(Guid id, ServiceLifetime serviceLifetime)
+        where TProvider : class, INavigationItemProvider
     {
-        _ = services.Configure<NavigationItemOptions>(optionKey, o => o.RuntimeItemsProvider = typeof(TProvider));
-        services.TryAddSingleton<TProvider>();
+        var serviceDescriptor = ServiceDescriptor.Describe(typeof(TProvider), typeof(TProvider), serviceLifetime);
+        services
+            .Configure<NavigationItemOptions>(optionKey, o => o.RuntimeItemsProvider = typeof(TProvider))
+            .TryAdd(serviceDescriptor);
+
         return new NavigationBuilder(services, id, isRoot: false);
     }
 }
